@@ -11,15 +11,6 @@ public class PaddleScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetAxis("Horizontal") < 0)
-        {
-            Debug.Log("Left");
-            transform.Translate(-10f * Time.deltaTime, 0, 0);
-        }
-        if(Input.GetAxis("Horizontal") > 0)
-        {
-            Debug.Log("Right");
-            transform.Translate(10f * Time.deltaTime, 0, 0);
-        }
+        transform.Translate(10f * Time.deltaTime * Input.GetAxis("Horizontal"), 0, 0);
     }
 }
