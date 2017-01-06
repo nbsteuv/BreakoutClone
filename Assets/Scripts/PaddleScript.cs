@@ -13,4 +13,16 @@ public class PaddleScript : MonoBehaviour {
 	void Update () {
         transform.Translate(10f * Time.deltaTime * Input.GetAxis("Horizontal"), 0, 0);
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        foreach(ContactPoint contact in collision.contacts)
+        {
+            if(contact.thisCollider == GetComponent<Collider>())
+            {
+                float english = contact.point.x - transform.position.x;
+                contact.otherCollider.attachedRigidbody.AddForce(300f * english, 0, 0);
+            }
+        }
+    }
 }
