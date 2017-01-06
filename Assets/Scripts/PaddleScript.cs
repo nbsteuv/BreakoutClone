@@ -14,21 +14,12 @@ public class PaddleScript : MonoBehaviour {
 		if(Input.GetAxis("Horizontal") < 0)
         {
             Debug.Log("Left");
+            transform.Translate(-10f, 0, 0);
         }
         if(Input.GetAxis("Horizontal") > 0)
         {
             Debug.Log("Right");
-        }
-
-        //GetButtonDown fires once per press, GetButton fires over and over like GetAxis
-
-        //if (Input.GetButtonDown("Jump"))
-        //{
-        //    Debug.Log("Jump");
-        //}
-        if (Input.GetButton("Jump"))
-        {
-            Debug.Log("Jump");
+            transform.Translate(10f, 0, 0);
         }
     }
 }
