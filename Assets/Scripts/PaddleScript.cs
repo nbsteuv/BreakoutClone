@@ -23,6 +23,7 @@ public class PaddleScript : MonoBehaviour {
         {
             if (attachedBall)
             {
+                attachedBall.GetComponent<Rigidbody>().isKinematic = false;
                 attachedBall.GetComponent<Rigidbody>().AddForce(100f, 300f, 0);
                 attachedBall = null;
             }
