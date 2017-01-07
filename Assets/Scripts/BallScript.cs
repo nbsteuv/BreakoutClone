@@ -12,9 +12,9 @@ public class BallScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         //Fire the ball
-        if (Input.GetButtonDown("Jump"))
-        {
-            GetComponent<Rigidbody>().AddForce(100f, 300f, 0);
-        }
+        //if (Input.GetButtonDown("Jump"))
+        //{
+        //    GetComponent<Rigidbody>().AddForce(100f, 300f, 0);
+        //}
     }
 }

@@ -6,6 +6,7 @@ public class PaddleScript : MonoBehaviour {
 
     public float paddleSpeed;
     public GameObject ballPrefab;
+    GameObject attachedBall = null;
 
 	// Use this for initialization
 	void Start () {
@@ -17,6 +18,15 @@ public class PaddleScript : MonoBehaviour {
 
         //Left-right motion
         transform.Translate(paddleSpeed * Time.deltaTime * Input.GetAxis("Horizontal"), 0, 0);
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            if (attachedBall)
+            {
+                attachedBall.GetComponent<Rigidbody>().AddForce(100f, 300f, 0);
+            }
+        }
+
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -42,6 +52,6 @@ public class PaddleScript : MonoBehaviour {
         Vector3 ballPosition = transform.position + new Vector3(0, 1f, 0);
         Quaternion ballRotation = Quaternion.identity;
 
-        Instantiate(ballPrefab, ballPosition, ballRotation);
+        attachedBall = (GameObject)Instantiate(ballPrefab, ballPosition, ballRotation);
     }
 }
