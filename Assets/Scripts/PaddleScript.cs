@@ -8,6 +8,8 @@ public class PaddleScript : MonoBehaviour {
     public GameObject ballPrefab;
     GameObject attachedBall = null;
 
+    int lives = 4;
+
 	// Use this for initialization
 	void Start () {
         SpawnBall();
@@ -60,5 +62,10 @@ public class PaddleScript : MonoBehaviour {
         Quaternion ballRotation = Quaternion.identity;
 
         attachedBall = (GameObject)Instantiate(ballPrefab, ballPosition, ballRotation);
+
+        lives--;
+
+        TextMesh livesText = GameObject.Find("Lives Counter").GetComponent<TextMesh>();
+        livesText.text = "Lives: " + lives;
     }
 }
