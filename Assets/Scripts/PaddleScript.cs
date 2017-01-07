@@ -29,7 +29,7 @@ public class PaddleScript : MonoBehaviour {
             if (Input.GetButtonDown("Jump"))
             {
                 ballRidgidbody.isKinematic = false;
-                ballRidgidbody.AddForce(100f, 300f, 0);
+                ballRidgidbody.AddForce(300f * Input.GetAxis("Horizontal"), 300f, 0);
                 attachedBall = null;
             }
         }
