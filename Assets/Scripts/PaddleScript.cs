@@ -7,11 +7,13 @@ public class PaddleScript : MonoBehaviour {
     public float paddleSpeed;
     public GameObject ballPrefab;
     GameObject attachedBall = null;
+    TextMesh livesText;
 
     int lives = 4;
 
 	// Use this for initialization
 	void Start () {
+        livesText = GameObject.Find("Lives Counter").GetComponent<TextMesh>();
         SpawnBall();
 	}
 	
@@ -65,7 +67,6 @@ public class PaddleScript : MonoBehaviour {
 
         lives--;
 
-        TextMesh livesText = GameObject.Find("Lives Counter").GetComponent<TextMesh>();
         livesText.text = "Lives: " + lives;
     }
 }
