@@ -10,6 +10,7 @@ public class PaddleScript : MonoBehaviour {
     TextMesh livesText;
 
     int lives = 4;
+    int score = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -68,5 +69,10 @@ public class PaddleScript : MonoBehaviour {
         lives--;
 
         livesText.text = "Lives: " + lives;
+    }
+
+    void OnGUI()
+    {
+        GUI.Label(new Rect(0, 10, 300, 100), "Score: " + score);
     }
 }
