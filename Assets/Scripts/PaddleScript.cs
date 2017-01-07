@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PaddleScript : MonoBehaviour {
 
+    public float paddleSpeed;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -11,7 +13,7 @@ public class PaddleScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        transform.Translate(10f * Time.deltaTime * Input.GetAxis("Horizontal"), 0, 0);
+        transform.Translate(paddleSpeed * Time.deltaTime * Input.GetAxis("Horizontal"), 0, 0);
     }
 
     private void OnCollisionEnter(Collision collision)
