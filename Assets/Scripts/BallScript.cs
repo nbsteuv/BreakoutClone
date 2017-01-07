@@ -6,7 +6,7 @@ public class BallScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        GetComponent<Rigidbody>().AddForce(100f, 300f, 0);
+        //GetComponent<Rigidbody>().AddForce(100f, 300f, 0);
 	}
 	
 	// Update is called once per frame

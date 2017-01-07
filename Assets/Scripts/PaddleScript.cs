@@ -5,14 +5,17 @@ using UnityEngine;
 public class PaddleScript : MonoBehaviour {
 
     public float paddleSpeed;
+    public GameObject ballPrefab;
 
 	// Use this for initialization
 	void Start () {
-		
+        SpawnBall();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+        //Left-right motion
         transform.Translate(paddleSpeed * Time.deltaTime * Input.GetAxis("Horizontal"), 0, 0);
     }
 
@@ -26,5 +29,19 @@ public class PaddleScript : MonoBehaviour {
                 contact.otherCollider.attachedRigidbody.AddForce(300f * english, 0, 0);
             }
         }
+    }
+
+    void SpawnBall()
+    {
+        if(ballPrefab == null)
+        {
+            Debug.Log("Include the ball prefab in the paddle object.");
+            return;
+        }
+
+        Vector3 ballPosition = transform.position + new Vector3(0, 1f, 0);
+        Quaternion ballRotation = Quaternion.identity;
+
+        Instantiate(ballPrefab, ballPosition, ballRotation);
     }
 }
