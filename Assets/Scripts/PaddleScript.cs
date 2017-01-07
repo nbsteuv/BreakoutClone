@@ -19,12 +19,17 @@ public class PaddleScript : MonoBehaviour {
         //Left-right motion
         transform.Translate(paddleSpeed * Time.deltaTime * Input.GetAxis("Horizontal"), 0, 0);
 
-        if (Input.GetButtonDown("Jump"))
+        if (attachedBall)
         {
-            if (attachedBall)
+            //More optimized by caching Rigidbody object
+            Rigidbody ballRidgidbody = attachedBall.GetComponent<Rigidbody>();
+            //TODO: Move the initial position vector to a public field
+            ballRidgidbody.position = transform.position + new Vector3(0, 1f, 0);
+
+            if (Input.GetButtonDown("Jump"))
             {
-                attachedBall.GetComponent<Rigidbody>().isKinematic = false;
-                attachedBall.GetComponent<Rigidbody>().AddForce(100f, 300f, 0);
+                ballRidgidbody.isKinematic = false;
+                ballRidgidbody.AddForce(100f, 300f, 0);
                 attachedBall = null;
             }
         }
