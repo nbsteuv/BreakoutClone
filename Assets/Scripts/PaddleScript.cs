@@ -48,7 +48,7 @@ public class PaddleScript : MonoBehaviour {
         }
     }
 
-    void SpawnBall()
+    public void SpawnBall()
     {
         if(ballPrefab == null)
         {

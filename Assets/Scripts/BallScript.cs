@@ -17,4 +17,12 @@ public class BallScript : MonoBehaviour {
         //    GetComponent<Rigidbody>().AddForce(100f, 300f, 0);
         //}
     }
+
+    public void Die()
+    {
+        Destroy(gameObject);
+        GameObject paddleObject = GameObject.Find("Paddle");
+        PaddleScript paddleScript = paddleObject.GetComponent<PaddleScript>();
+        paddleScript.SpawnBall();
+    }
 }
