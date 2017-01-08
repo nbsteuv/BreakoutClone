@@ -17,7 +17,7 @@ public class PaddleScript : MonoBehaviour {
 	void Start () {
         DontDestroyOnLoad(gameObject);
         livesText = GameObject.Find("Lives Counter").GetComponent<TextMesh>();
-        SpawnBall();
+        LoseLife();
 	}
 	
 	// Update is called once per frame
@@ -53,6 +53,19 @@ public class PaddleScript : MonoBehaviour {
 
     }
 
+    public void LoseLife()
+    {
+        lives--;
+        livesText.text = "Lives: " + lives;
+        if (lives > 0)
+        {
+            SpawnBall();
+        } else
+        {
+            //End game
+        }
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         foreach(ContactPoint contact in collision.contacts)
@@ -78,9 +91,6 @@ public class PaddleScript : MonoBehaviour {
 
         attachedBall = (GameObject)Instantiate(ballPrefab, ballPosition, ballRotation);
 
-        lives--;
-
-        livesText.text = "Lives: " + lives;
     }
 
     void OnGUI()

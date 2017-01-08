@@ -23,6 +23,6 @@ public class BallScript : MonoBehaviour {
         Destroy(gameObject);
         GameObject paddleObject = GameObject.Find("Paddle");
         PaddleScript paddleScript = paddleObject.GetComponent<PaddleScript>();
-        paddleScript.SpawnBall();
+        paddleScript.LoseLife();
     }
 }
