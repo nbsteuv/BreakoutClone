@@ -6,6 +6,7 @@ public class BrickScript : MonoBehaviour {
 
     static int numBricks = 0;
     public int pointValue = 1;
+    public int hitPoints = 1;
 
 	// Use this for initialization
 	void Start () {
@@ -19,12 +20,22 @@ public class BrickScript : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
+        hitPoints--;
+        if(hitPoints <= 0)
+        {
+            Die();
+        }
+        
+    } 
+
+    void Die()
+    {
         Destroy(gameObject);
         GameObject.Find("Paddle").GetComponent<PaddleScript>().AddPoint(pointValue);
         numBricks--;
-        if(numBricks <= 0)
+        if (numBricks <= 0)
         {
             //load new level
         }
-    } 
+    }
 }
