@@ -25,6 +25,16 @@ public class PaddleScript : MonoBehaviour {
         //Left-right motion
         transform.Translate(paddleSpeed * Time.deltaTime * Input.GetAxis("Horizontal"), 0, 0);
 
+        if(transform.position.x > 7.4f)
+        {
+            transform.position = new Vector3(7.4f, transform.position.y, transform.position.z);
+        }
+
+        if (transform.position.x < -7.4f)
+        {
+            transform.position = new Vector3(-7.4f, transform.position.y, transform.position.z);
+        }
+
         if (attachedBall)
         {
             //More optimized by caching Rigidbody object
