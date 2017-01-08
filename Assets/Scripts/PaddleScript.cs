@@ -11,6 +11,7 @@ public class PaddleScript : MonoBehaviour {
 
     int lives = 4;
     int score = 0;
+    public GUISkin scoreboardSkin;
 
 	// Use this for initialization
 	void Start () {
@@ -73,6 +74,7 @@ public class PaddleScript : MonoBehaviour {
 
     void OnGUI()
     {
+        GUI.skin = scoreboardSkin;
         GUI.Label(new Rect(0, 10, 300, 100), "Score: " + score);
     }
 }
