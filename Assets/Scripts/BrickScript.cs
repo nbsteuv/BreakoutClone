@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class BrickScript : MonoBehaviour {
 
+    static int numBricks = 0;
     public int pointValue = 1;
 
 	// Use this for initialization
 	void Start () {
-		
+        numBricks++;
 	}
 	
 	// Update is called once per frame
@@ -19,6 +20,11 @@ public class BrickScript : MonoBehaviour {
     private void OnCollisionEnter(Collision collision)
     {
         Destroy(gameObject);
-        GameObject.Find("Paddle").GetComponent<PaddleScript>().AddPoint(pointValue) ;
+        GameObject.Find("Paddle").GetComponent<PaddleScript>().AddPoint(pointValue);
+        numBricks--;
+        if(numBricks <= 0)
+        {
+            //load new level
+        }
     } 
 }
