@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BrickScript : MonoBehaviour {
 
+    public int pointValue = 1;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -17,5 +19,6 @@ public class BrickScript : MonoBehaviour {
     private void OnCollisionEnter(Collision collision)
     {
         Destroy(gameObject);
+        GameObject.Find("Paddle").GetComponent<PaddleScript>().AddPoint(pointValue) ;
     } 
 }

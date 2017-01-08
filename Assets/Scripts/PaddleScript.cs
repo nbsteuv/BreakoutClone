@@ -77,4 +77,9 @@ public class PaddleScript : MonoBehaviour {
         GUI.skin = scoreboardSkin;
         GUI.Label(new Rect(0, 10, 300, 100), "Score: " + score);
     }
+
+    public void AddPoint(int pointValue)
+    {
+        score += pointValue;
+    }
 }
