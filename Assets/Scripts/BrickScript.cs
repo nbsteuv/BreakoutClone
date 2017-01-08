@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BrickScript : MonoBehaviour {
 
@@ -35,7 +36,7 @@ public class BrickScript : MonoBehaviour {
         numBricks--;
         if (numBricks <= 0)
         {
-            //load new level
+            SceneManager.LoadScene("Level2");
         }
     }
 }
