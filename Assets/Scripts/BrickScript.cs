@@ -32,11 +32,13 @@ public class BrickScript : MonoBehaviour {
     void Die()
     {
         Destroy(gameObject);
-        GameObject.Find("Paddle").GetComponent<PaddleScript>().AddPoint(pointValue);
+        PaddleScript paddleScript = GameObject.Find("Paddle").GetComponent<PaddleScript>();
+        paddleScript.AddPoint(pointValue);
         numBricks--;
         if (numBricks <= 0)
         {
             SceneManager.LoadScene("Level2");
+            paddleScript.SpawnBall();
         }
     }
 }
