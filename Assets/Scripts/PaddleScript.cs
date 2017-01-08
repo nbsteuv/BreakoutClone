@@ -15,6 +15,7 @@ public class PaddleScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        DontDestroyOnLoad(gameObject);
         livesText = GameObject.Find("Lives Counter").GetComponent<TextMesh>();
         SpawnBall();
 	}
