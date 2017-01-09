@@ -9,16 +9,18 @@ public class PaddleScript : MonoBehaviour {
     GameObject attachedBall = null;
     TextMesh livesText;
 
-    int lives = 4;
+    int lives = 3;
     int score = 0;
     public GUISkin scoreboardSkin;
 
 	// Use this for initialization
 	void Start () {
         DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(GameObject.Find("Lives Counter"));
         livesText = GameObject.Find("Lives Counter").GetComponent<TextMesh>();
-        LoseLife();
-	}
+        livesText.text = "Lives: " + lives;
+        SpawnBall();
+    }
 	
 	// Update is called once per frame
 	void Update () {
