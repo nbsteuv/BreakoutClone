@@ -38,7 +38,6 @@ public class BrickScript : MonoBehaviour {
         if (numBricks <= 0)
         {
             SceneManager.LoadScene("Level2");
-            paddleScript.SpawnBall();
         }
     }
 }

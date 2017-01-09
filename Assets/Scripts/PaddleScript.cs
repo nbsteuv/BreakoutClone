@@ -80,6 +80,11 @@ public class PaddleScript : MonoBehaviour {
         }
     }
 
+    public void OnLevelWasLoaded(int level)
+    {
+        SpawnBall();
+    }
+
     public void SpawnBall()
     {
         if(ballPrefab == null)
