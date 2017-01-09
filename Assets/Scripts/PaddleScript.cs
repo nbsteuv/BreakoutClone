@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PaddleScript : MonoBehaviour {
 
@@ -64,7 +65,8 @@ public class PaddleScript : MonoBehaviour {
             SpawnBall();
         } else
         {
-            //End game
+            Destroy(gameObject);
+            SceneManager.LoadScene("GameOver");
         }
     }
 
