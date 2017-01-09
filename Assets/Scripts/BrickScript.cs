@@ -19,7 +19,7 @@ public class BrickScript : MonoBehaviour {
 		
 	}
 
-    private void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter(Collision collision)
     {
         hitPoints--;
         if(hitPoints <= 0)
