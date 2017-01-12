@@ -11,6 +11,7 @@ public class BrickScript : MonoBehaviour {
     GameObject powerup = null;
 
     public GameObject powerupPrefab;
+    public int powerupPercentChance;
 
 	// Use this for initialization
 	void Start () {
@@ -43,7 +44,22 @@ public class BrickScript : MonoBehaviour {
             SceneManager.LoadScene("Level2");
         } else
         {
-            SpawnPowerup();
+            if (powerupWillSpawn())
+            {
+                SpawnPowerup();
+            }
+        }
+    }
+
+    bool powerupWillSpawn()
+    {
+        int randomInteger = Random.Range(0, 101);
+        if(randomInteger <= powerupPercentChance)
+        {
+            return true;
+        } else
+        {
+            return false;
         }
     }
 
