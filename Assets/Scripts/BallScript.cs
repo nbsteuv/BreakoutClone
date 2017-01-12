@@ -30,6 +30,6 @@ public class BallScript : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
-        AudioSource.PlayClipAtPoint(blipAudio[0], transform.position, 0.5f);
+        AudioSource.PlayClipAtPoint(blipAudio[Random.Range(0, blipAudio.Length)], transform.position, 0.5f);
     }
 }
