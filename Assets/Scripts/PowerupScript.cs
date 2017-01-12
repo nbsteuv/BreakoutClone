@@ -11,7 +11,7 @@ public class PowerupScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        gameObject.GetComponent<Rigidbody>().AddTorque( Vector3.forward * 10f );	
 	}
 
     private void OnCollisionEnter(Collision collision)
