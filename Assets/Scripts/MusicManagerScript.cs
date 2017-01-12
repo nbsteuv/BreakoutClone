@@ -10,12 +10,14 @@ public class MusicManagerScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         currentAudio = GetComponent<AudioSource>();
-        currentAudio.clip = songs[0];
-        currentAudio.Play();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if(currentAudio.isPlaying == false)
+        {
+            currentAudio.clip = songs[0];
+            currentAudio.Play();
+        }
 	}
 }
