@@ -16,7 +16,7 @@ public class MusicManagerScript : MonoBehaviour {
 	void Update () {
 		if(currentAudio.isPlaying == false)
         {
-            currentAudio.clip = songs[0];
+            currentAudio.clip = songs[Random.Range(0, songs.Length)];
             currentAudio.Play();
         }
 	}
