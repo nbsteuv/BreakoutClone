@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BallScript : MonoBehaviour {
 
+    public AudioClip[] blipAudio;
+
 	// Use this for initialization
 	void Start () {
 
@@ -24,5 +26,10 @@ public class BallScript : MonoBehaviour {
         GameObject paddleObject = GameObject.Find("Paddle");
         PaddleScript paddleScript = paddleObject.GetComponent<PaddleScript>();
         paddleScript.LoseLife();
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        AudioSource.PlayClipAtPoint(blipAudio[0], transform.position, 0.5f);
     }
 }
