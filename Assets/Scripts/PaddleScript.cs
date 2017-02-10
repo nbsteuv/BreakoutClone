@@ -20,6 +20,7 @@ public class PaddleScript : MonoBehaviour {
 	void Start () {
         DontDestroyOnLoad(gameObject);
         DontDestroyOnLoad(GameObject.Find("Lives Counter"));
+        DontDestroyOnLoad(GameObject.Find("MusicManager"));
         livesText = GameObject.Find("Lives Counter").GetComponent<TextMesh>();
         livesText.text = "Lives: " + lives;
         SpawnBall();
