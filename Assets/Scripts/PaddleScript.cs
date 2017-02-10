@@ -14,6 +14,8 @@ public class PaddleScript : MonoBehaviour {
     int score = 0;
     public GUISkin scoreboardSkin;
 
+    int balls = 0;
+
 	// Use this for initialization
 	void Start () {
         DontDestroyOnLoad(gameObject);
@@ -99,7 +101,7 @@ public class PaddleScript : MonoBehaviour {
         Quaternion ballRotation = Quaternion.identity;
 
         attachedBall = (GameObject)Instantiate(ballPrefab, ballPosition, ballRotation);
-
+        balls++;
     }
 
     void OnGUI()
@@ -111,5 +113,14 @@ public class PaddleScript : MonoBehaviour {
     public void AddPoint(int pointValue)
     {
         score += pointValue;
+    }
+
+    public void LoseBall()
+    {
+        balls--;
+        if(balls <= 0)
+        {
+            LoseLife();
+        }
     }
 }
