@@ -6,8 +6,12 @@ public class PowerupScript : MonoBehaviour {
 
     public Material extraBallPowerupMaterial;
 
+    PaddleScript paddleScript;
+
 	// Use this for initialization
 	void Start () {
+        GameObject paddleObject = GameObject.Find("Paddle");
+        paddleScript = paddleObject.GetComponent<PaddleScript>();
         ApplyMaterial();
 	}
 	
@@ -18,6 +22,7 @@ public class PowerupScript : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
+        paddleScript.SpawnBall();
         Destroy(gameObject);
     }
 
