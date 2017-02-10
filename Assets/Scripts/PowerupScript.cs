@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class PowerupScript : MonoBehaviour {
 
+    public Material extraBallPowerupMaterial;
+
 	// Use this for initialization
 	void Start () {
-		
+        ApplyMaterial();
 	}
 	
 	// Update is called once per frame
@@ -17,5 +19,11 @@ public class PowerupScript : MonoBehaviour {
     private void OnCollisionEnter(Collision collision)
     {
         Destroy(gameObject);
+    }
+
+    void ApplyMaterial()
+    {
+        Renderer powerupRenderer = gameObject.GetComponent<Renderer>();
+        powerupRenderer.material = extraBallPowerupMaterial;
     }
 }
