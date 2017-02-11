@@ -111,7 +111,8 @@ public class PaddleScript : MonoBehaviour {
             GameObject.Find("Score Text").GetComponent<TextMesh>().text = "Score:\n" + score;
         } else
         {
-            balls--;
+            balls = 0;
+            Debug.Log("Balls: " + balls);
             SpawnBall();
         }
     }
@@ -131,6 +132,7 @@ public class PaddleScript : MonoBehaviour {
         {
             attachedBall = (GameObject)Instantiate(ballPrefab, ballPosition, ballRotation);
             balls++;
+            Debug.Log("Balls: " + balls);
         }
     }
 
@@ -148,6 +150,7 @@ public class PaddleScript : MonoBehaviour {
     public void LoseBall()
     {
         balls--;
+        Debug.Log("Balls: " + balls);
         if (balls <= 0)
         {
             LoseLife();
