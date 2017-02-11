@@ -124,4 +124,10 @@ public class PaddleScript : MonoBehaviour {
             LoseLife();
         }
     }
+
+    public void AddLife()
+    {
+        lives++;
+        livesText.text = "Lives: " + lives;
+    }
 }

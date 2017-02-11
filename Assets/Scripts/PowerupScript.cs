@@ -6,6 +6,7 @@ using UnityEngine;
 public class PowerupScript : MonoBehaviour {
 
     public Material extraBallPowerupMaterial;
+    public Material extraLifePowerupMaterial;
 
     System.Random random = new System.Random();
     PaddleScript paddleScript;
@@ -29,6 +30,7 @@ public class PowerupScript : MonoBehaviour {
         GameObject paddleObject = GameObject.Find("Paddle");
         paddleScript = paddleObject.GetComponent<PaddleScript>();
         powerups.Add(new Powerup(extraBallPowerupMaterial, SpawnExtraBall));
+        powerups.Add(new Powerup(extraLifePowerupMaterial, AddLife));
         SetPowerup();
         ApplyMaterial(powerup.powerupMaterial);
     }
@@ -59,5 +61,10 @@ public class PowerupScript : MonoBehaviour {
     void SpawnExtraBall()
     {
         paddleScript.SpawnBall();
+    }
+
+    void AddLife()
+    {
+        paddleScript.AddLife();
     }
 }
