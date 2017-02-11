@@ -102,7 +102,11 @@ public class PaddleScript : MonoBehaviour {
         Vector3 ballPosition = transform.position + new Vector3(0, 1f, 0);
         Quaternion ballRotation = Quaternion.identity;
 
-        attachedBall = (GameObject)Instantiate(ballPrefab, ballPosition, ballRotation);
+        if (!attachedBall)
+        {
+            attachedBall = (GameObject)Instantiate(ballPrefab, ballPosition, ballRotation);
+        }
+        
         balls++;
     }
 
