@@ -119,9 +119,7 @@ public class PaddleScript : MonoBehaviour {
 
     public void LoseBall()
     {
-        Debug.Log("Lose ball called");
         balls--;
-        Debug.Log(balls);
         if (balls <= 0)
         {
             LoseLife();
