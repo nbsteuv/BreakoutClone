@@ -113,9 +113,8 @@ public class PaddleScript : MonoBehaviour {
         if (!attachedBall)
         {
             attachedBall = (GameObject)Instantiate(ballPrefab, ballPosition, ballRotation);
+            balls++;
         }
-        
-        balls++;
     }
 
     void OnGUI()
