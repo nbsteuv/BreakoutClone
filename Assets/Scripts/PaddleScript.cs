@@ -14,6 +14,7 @@ public class PaddleScript : MonoBehaviour {
     int lives = 3;
     int score = 0;
     public GUISkin scoreboardSkin;
+    bool win = false;
 
     int balls = 0;
     int currentLevel;
@@ -76,8 +77,7 @@ public class PaddleScript : MonoBehaviour {
             SpawnBall();
         } else
         {
-            Destroy(gameObject);
-            SceneManager.LoadScene("GameOver");
+            EndGame();
         }
     }
 
@@ -95,8 +95,25 @@ public class PaddleScript : MonoBehaviour {
 
     public void OnLevelWasLoaded(int level)
     {
-        balls--;
-        SpawnBall();
+        GameObject gameOverText = GameObject.Find("Game Over Text");
+        if (gameOverText)
+        {
+            string gameOver;
+            if (win)
+            {
+                gameOver = "You Win!";
+            }
+            else
+            {
+                gameOver = "Game Over";
+            }
+           gameOverText.GetComponent<TextMesh>().text = gameOver;
+            GameObject.Find("Score Text").GetComponent<TextMesh>().text = "Score:\n" + score;
+        } else
+        {
+            balls--;
+            SpawnBall();
+        }
     }
 
     public void SpawnBall()
@@ -148,7 +165,17 @@ public class PaddleScript : MonoBehaviour {
         currentLevel++;
         if (levelDictionary.ContainsKey(currentLevel)){
             SceneManager.LoadScene(levelDictionary[currentLevel]);
+        } else
+        {
+            win = true;
+            EndGame();
         }
+    }
+
+    public void EndGame()
+    {
+        GetComponent<MeshRenderer>().enabled = false;
+        SceneManager.LoadScene("GameOver");
     }
 
     [System.Serializable]
