@@ -8,7 +8,6 @@ public class BrickScript : MonoBehaviour {
     static int numBricks = 0;
     public int pointValue = 1;
     public int hitPoints = 1;
-    GameObject powerup = null;
 
     public GameObject powerupPrefab;
     public int powerupPercentChance;

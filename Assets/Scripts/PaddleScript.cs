@@ -87,6 +87,7 @@ public class PaddleScript : MonoBehaviour {
 
     public void OnLevelWasLoaded(int level)
     {
+        balls--;
         SpawnBall();
     }
 
@@ -118,8 +119,10 @@ public class PaddleScript : MonoBehaviour {
 
     public void LoseBall()
     {
+        Debug.Log("Lose ball called");
         balls--;
-        if(balls <= 0)
+        Debug.Log(balls);
+        if (balls <= 0)
         {
             LoseLife();
         }
