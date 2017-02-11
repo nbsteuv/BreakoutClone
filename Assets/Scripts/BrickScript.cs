@@ -8,6 +8,7 @@ public class BrickScript : MonoBehaviour {
     static int numBricks = 0;
     public int pointValue = 1;
     public int hitPoints = 1;
+    public bool topAttackOnly = false;
 
     public GameObject powerupPrefab;
     public int powerupPercentChance;
@@ -24,13 +25,20 @@ public class BrickScript : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision)
     {
+        if (!topAttackOnly)
+        {
+            TakeHit();
+        }
+    } 
+
+    public void TakeHit()
+    {
         hitPoints--;
-        if(hitPoints <= 0)
+        if (hitPoints <= 0)
         {
             Die();
         }
-        
-    } 
+    }
 
     void Die()
     {
