@@ -7,6 +7,7 @@ public class PaddleScript : MonoBehaviour {
 
     public float paddleSpeed;
     public GameObject ballPrefab;
+    public level[] levels;
     GameObject attachedBall = null;
     TextMesh livesText;
 
@@ -15,9 +16,16 @@ public class PaddleScript : MonoBehaviour {
     public GUISkin scoreboardSkin;
 
     int balls = 0;
+    int currentLevel;
+    Dictionary<int, string> levelDictionary = new Dictionary<int, string>();
 
 	// Use this for initialization
 	void Start () {
+        currentLevel = 1;
+        foreach(level level in levels)
+        {
+            levelDictionary.Add(level.levelNumber, level.levelName);
+        }
         DontDestroyOnLoad(gameObject);
         DontDestroyOnLoad(GameObject.Find("Lives Counter"));
         DontDestroyOnLoad(GameObject.Find("MusicManager"));
@@ -134,5 +142,20 @@ public class PaddleScript : MonoBehaviour {
     {
         lives++;
         livesText.text = "Lives: " + lives;
+    }
+
+    public void WinLevel()
+    {
+        currentLevel++;
+        if (levelDictionary.ContainsKey(currentLevel)){
+            SceneManager.LoadScene(levelDictionary[currentLevel]);
+        }
+    }
+
+    [System.Serializable]
+    public struct level
+    {
+        public int levelNumber;
+        public string levelName;
     }
 }

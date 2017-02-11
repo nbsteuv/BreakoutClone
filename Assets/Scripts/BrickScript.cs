@@ -40,7 +40,7 @@ public class BrickScript : MonoBehaviour {
         numBricks--;
         if (numBricks <= 0)
         {
-            SceneManager.LoadScene("Level2");
+            paddleScript.WinLevel();
         } else
         {
             if (powerupWillSpawn())
