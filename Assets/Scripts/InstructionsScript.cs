@@ -5,16 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class InstructionsScript : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        if (Input.GetButtonDown("Jump"))
-        {
-            SceneManager.LoadScene("Level1");
-        }
-	}
+    public void StartGame()
+    {
+        SceneManager.LoadScene(1);
+    }
+
 }
