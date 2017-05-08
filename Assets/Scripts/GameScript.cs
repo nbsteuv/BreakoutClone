@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 public class GameScript : MonoBehaviour {
 
     static GameScript instance;
+    int lives;
+    int score;
+    int balls;
 
     private void Awake()
     {
@@ -15,6 +18,7 @@ public class GameScript : MonoBehaviour {
         } else
         {
             instance = this;
+            GameObject.DontDestroyOnLoad(gameObject);
         }
     }
 
