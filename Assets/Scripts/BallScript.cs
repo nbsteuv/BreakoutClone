@@ -6,6 +6,9 @@ public class BallScript : MonoBehaviour {
 
     public AudioClip[] blipAudio;
 
+    public delegate void BallDeathAction();
+    public event BallDeathAction BallDeath;
+
 	// Use this for initialization
 	void Start () {
 
@@ -22,10 +25,20 @@ public class BallScript : MonoBehaviour {
 
     public void Die()
     {
+        OnBallDeath();
         Destroy(gameObject);
-        GameObject paddleObject = GameObject.Find("Paddle");
-        PaddleScript paddleScript = paddleObject.GetComponent<PaddleScript>();
-        paddleScript.LoseBall();
+        
+        //GameObject paddleObject = GameObject.Find("Paddle");
+        //PaddleScript paddleScript = paddleObject.GetComponent<PaddleScript>();
+        //paddleScript.LoseBall();
+    }
+
+    public virtual void OnBallDeath()
+    {
+        if (BallDeath != null)
+        {
+            BallDeath();
+        }
     }
 
     private void OnCollisionEnter(Collision collision)

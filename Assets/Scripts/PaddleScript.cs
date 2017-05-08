@@ -131,6 +131,7 @@ public class PaddleScript : MonoBehaviour {
         if (!attachedBall)
         {
             attachedBall = (GameObject)Instantiate(ballPrefab, ballPosition, ballRotation);
+            attachedBall.GetComponent<BallScript>().BallDeath += LoseBall;
             balls++;
             Debug.Log("Balls: " + balls);
         }
