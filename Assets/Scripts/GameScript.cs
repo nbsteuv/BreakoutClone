@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class GameScript : MonoBehaviour {
 
     static GameScript instance;
+    GameObject paddle;
+
     int lives;
     int score;
     int balls;
@@ -20,6 +22,7 @@ public class GameScript : MonoBehaviour {
             instance = this;
             GameObject.DontDestroyOnLoad(gameObject);
         }
+
     }
 
     // Use this for initialization
@@ -32,8 +35,30 @@ public class GameScript : MonoBehaviour {
 		
 	}
 
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoad;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoad;
+    }
+
     public void StartGame()
     {
         SceneManager.LoadScene(1);
     }
+
+    void OnSceneLoad(Scene scene, LoadSceneMode mode)
+    {
+        GameObject[] paddles = GameObject.FindGameObjectsWithTag("Paddle");
+        if(paddles.Length > 0)
+        {
+            paddle = paddles[0];
+        }
+        
+    }
+
+
 }
