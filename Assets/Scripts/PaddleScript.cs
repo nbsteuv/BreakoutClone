@@ -8,7 +8,7 @@ public class PaddleScript : MonoBehaviour {
     public float paddleSpeed;
     public GameObject ballPrefab;
     public level[] levels;
-    GameObject attachedBall = null;
+    public GameObject attachedBall = null;
     TextMesh livesText;
 
     int lives = 3;
@@ -16,7 +16,6 @@ public class PaddleScript : MonoBehaviour {
     public GUISkin scoreboardSkin;
     bool win = false;
 
-    int balls = 0;
     int currentLevel;
     Dictionary<int, string> levelDictionary = new Dictionary<int, string>();
 
@@ -32,7 +31,6 @@ public class PaddleScript : MonoBehaviour {
         DontDestroyOnLoad(GameObject.Find("MusicManager"));
         livesText = GameObject.Find("Lives Counter").GetComponent<TextMesh>();
         livesText.text = "Lives: " + lives;
-        SpawnBall();
     }
 	
 	// Update is called once per frame
@@ -53,9 +51,7 @@ public class PaddleScript : MonoBehaviour {
 
         if (attachedBall)
         {
-            //More optimized by caching Rigidbody object
             Rigidbody ballRidgidbody = attachedBall.GetComponent<Rigidbody>();
-            //TODO: Move the initial position vector to a public field
             ballRidgidbody.position = transform.position + new Vector3(0, 1f, 0);
 
             if (Input.GetButtonDown("Jump"))
@@ -65,7 +61,6 @@ public class PaddleScript : MonoBehaviour {
                 attachedBall = null;
             }
         }
-
     }
 
     public void LoseLife()
@@ -74,7 +69,7 @@ public class PaddleScript : MonoBehaviour {
         livesText.text = "Lives: " + lives;
         if (lives > 0)
         {
-            SpawnBall();
+            //SpawnBall();
         } else
         {
             EndGame();
@@ -109,31 +104,6 @@ public class PaddleScript : MonoBehaviour {
             }
            gameOverText.GetComponent<TextMesh>().text = gameOver;
             GameObject.Find("Score Text").GetComponent<TextMesh>().text = "Score:\n" + score;
-        } else
-        {
-            balls = 0;
-            Debug.Log("Balls: " + balls);
-            SpawnBall();
-        }
-    }
-
-    public void SpawnBall()
-    {
-        if(ballPrefab == null)
-        {
-            Debug.Log("Include the ball prefab in the paddle object.");
-            return;
-        }
-
-        Vector3 ballPosition = transform.position + new Vector3(0, 1f, 0);
-        Quaternion ballRotation = Quaternion.identity;
-
-        if (!attachedBall)
-        {
-            attachedBall = (GameObject)Instantiate(ballPrefab, ballPosition, ballRotation);
-            attachedBall.GetComponent<BallScript>().BallDeath += LoseBall;
-            balls++;
-            Debug.Log("Balls: " + balls);
         }
     }
 
@@ -146,16 +116,6 @@ public class PaddleScript : MonoBehaviour {
     public void AddPoint(int pointValue)
     {
         score += pointValue;
-    }
-
-    public void LoseBall()
-    {
-        balls--;
-        Debug.Log("Balls: " + balls);
-        if (balls <= 0)
-        {
-            LoseLife();
-        }
     }
 
     public void AddLife()

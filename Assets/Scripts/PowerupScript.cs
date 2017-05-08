@@ -60,7 +60,7 @@ public class PowerupScript : MonoBehaviour {
 
     void SpawnExtraBall()
     {
-        paddleScript.SpawnBall();
+        //paddleScript.SpawnBall();
     }
 
     void AddLife()

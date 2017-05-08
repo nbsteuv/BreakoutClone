@@ -6,10 +6,11 @@ using UnityEngine.SceneManagement;
 public class GameScript : MonoBehaviour {
 
     static GameScript instance;
+
+    public GameObject ballPrefab;
+
     GameObject paddle;
 
-    int lives;
-    int score;
     int balls;
 
     private void Awake()
@@ -25,15 +26,13 @@ public class GameScript : MonoBehaviour {
 
     }
 
-    // Use this for initialization
     void Start () {
 		
 	}
 	
-	// Update is called once per frame
 	void Update () {
-		
-	}
+        
+    }
 
     private void OnEnable()
     {
@@ -48,6 +47,7 @@ public class GameScript : MonoBehaviour {
     public void StartGame()
     {
         SceneManager.LoadScene(1);
+        balls = 0;
     }
 
     void OnSceneLoad(Scene scene, LoadSceneMode mode)
@@ -56,8 +56,47 @@ public class GameScript : MonoBehaviour {
         if(paddles.Length > 0)
         {
             paddle = paddles[0];
+            SpawnBall();
         }
         
+    }
+
+    public void SpawnBall()
+    {
+        if (ballPrefab == null)
+        {
+            Debug.Log("Include the ball prefab in the game controller object.");
+            return;
+        }
+
+        if (paddle == null)
+        {
+            Debug.Log("No paddle found.");
+            return;
+        }
+        Vector3 ballPosition = paddle.transform.position + new Vector3(0, 1f, 0);
+        Quaternion ballRotation = Quaternion.identity;
+
+        if (paddle.GetComponent<PaddleScript>().attachedBall == null)
+        {
+            paddle.GetComponent<PaddleScript>().attachedBall = (GameObject)Instantiate(ballPrefab, ballPosition, ballRotation);
+            paddle.GetComponent<PaddleScript>().attachedBall.GetComponent<BallScript>().BallDeath += LoseBall;
+            balls++;
+        }
+    }
+
+    void LoseBall()
+    {
+        balls--;
+        if (balls <= 0)
+        {
+            paddle.GetComponent<PaddleScript>().LoseLife();
+        }
+    }
+
+    void Lose()
+    {
+
     }
 
 
