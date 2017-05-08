@@ -5,8 +5,21 @@ using UnityEngine.SceneManagement;
 
 public class GameScript : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
+    static GameScript instance;
+
+    private void Awake()
+    {
+        if(instance != null)
+        {
+            GameObject.Destroy(gameObject); ;
+        } else
+        {
+            instance = this;
+        }
+    }
+
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
