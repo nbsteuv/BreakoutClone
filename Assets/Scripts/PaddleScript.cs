@@ -9,10 +9,7 @@ public class PaddleScript : MonoBehaviour {
     public GameObject ballPrefab;
     public level[] levels;
     public GameObject attachedBall = null;
-    public TextMesh livesText;
 
-    int score = 0;
-    public GUISkin scoreboardSkin;
     bool win = false;
 
     int currentLevel;
@@ -26,9 +23,7 @@ public class PaddleScript : MonoBehaviour {
             levelDictionary.Add(level.levelNumber, level.levelName);
         }
         DontDestroyOnLoad(gameObject);
-        DontDestroyOnLoad(GameObject.Find("Lives Counter"));
         DontDestroyOnLoad(GameObject.Find("MusicManager"));
-        livesText = GameObject.Find("Lives Counter").GetComponent<TextMesh>();
     }
 	
 	// Update is called once per frame

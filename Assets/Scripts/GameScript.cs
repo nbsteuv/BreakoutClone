@@ -57,7 +57,6 @@ public class GameScript : MonoBehaviour {
         if(paddles.Length > 0)
         {
             paddle = paddles[0];
-            //paddle.GetComponent<PaddleScript>().livesText.text = "Lives: " + lives;
             SpawnBall();
         }
         
@@ -99,7 +98,6 @@ public class GameScript : MonoBehaviour {
     public void LoseLife()
     {
         lives--;
-        paddle.GetComponent<PaddleScript>().livesText.text = "Lives: " + lives;
         if (lives > 0)
         {
             SpawnBall();
