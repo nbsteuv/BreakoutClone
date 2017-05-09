@@ -4,15 +4,27 @@ using UnityEngine;
 
 public class MusicManagerScript : MonoBehaviour {
 
+    MusicManagerScript instance;
+
     public AudioClip[] songs;
     AudioSource currentAudio;
 
-	// Use this for initialization
-	void Start () {
+    private void Awake()
+    {
+        if(instance != null)
+        {
+            GameObject.Destroy(gameObject);
+        } else
+        {
+            instance = this;
+            GameObject.DontDestroyOnLoad(gameObject);
+        }
+    }
+
+    void Start () {
         currentAudio = GetComponent<AudioSource>();
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		if(currentAudio.isPlaying == false)
         {
