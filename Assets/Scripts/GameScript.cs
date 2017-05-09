@@ -148,7 +148,7 @@ public class GameScript : MonoBehaviour {
         AddPoint(args.Points);
         if(args.NumBricks <= 0)
         {
-            Debug.Log("Win.");
+            LoadNextLevel();
         }
     }
 
@@ -156,6 +156,12 @@ public class GameScript : MonoBehaviour {
     {
         score += points;
         scoreText.text = "Score " + score;
+    }
+
+    void LoadNextLevel()
+    {
+        int currentIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentIndex + 1);
     }
 
     void Lose()

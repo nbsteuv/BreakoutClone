@@ -6,27 +6,13 @@ using UnityEngine.SceneManagement;
 public class PaddleScript : MonoBehaviour {
 
     public float paddleSpeed;
-    public GameObject ballPrefab;
-    public level[] levels;
     public GameObject attachedBall = null;
 
-    bool win = false;
-
-    int currentLevel;
-    Dictionary<int, string> levelDictionary = new Dictionary<int, string>();
-
-	// Use this for initialization
 	void Start () {
-        currentLevel = 1;
-        foreach(level level in levels)
-        {
-            levelDictionary.Add(level.levelNumber, level.levelName);
-        }
         DontDestroyOnLoad(gameObject);
         DontDestroyOnLoad(GameObject.Find("MusicManager"));
     }
 	
-	// Update is called once per frame
 	void Update () {
 
         //Left-right motion
@@ -68,52 +54,10 @@ public class PaddleScript : MonoBehaviour {
         }
     }
 
-    public void OnLevelWasLoaded(int level)
-    {
-        GameObject gameOverText = GameObject.Find("Game Over Text");
-        if (gameOverText)
-        {
-            string gameOver;
-            if (win)
-            {
-                gameOver = "You Win!";
-            }
-            else
-            {
-                gameOver = "Game Over";
-            }
-           gameOverText.GetComponent<TextMesh>().text = gameOver;
-            //GameObject.Find("Score Text").GetComponent<TextMesh>().text = "Score:\n" + score;
-        }
-    }
-
-    public void AddPoint(int pointValue)
-    {
-        //score += pointValue;
-    }
-
-    public void WinLevel()
-    {
-        currentLevel++;
-        if (levelDictionary.ContainsKey(currentLevel)){
-            SceneManager.LoadScene(levelDictionary[currentLevel]);
-        } else
-        {
-            win = true;
-            EndGame();
-        }
-    }
-
     public void EndGame()
     {
         GetComponent<MeshRenderer>().enabled = false;
         SceneManager.LoadScene("GameOver");
     }
 
-    [System.Serializable]
-    public struct level
-    {
-        public int levelNumber;
-        public string levelName;
-    }
 }
