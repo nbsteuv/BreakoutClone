@@ -8,6 +8,7 @@ public class GameScript : MonoBehaviour {
     static GameScript instance;
 
     public GameObject ballPrefab;
+    public int lives = 3;
 
     GameObject paddle;
 
@@ -17,7 +18,7 @@ public class GameScript : MonoBehaviour {
     {
         if(instance != null)
         {
-            GameObject.Destroy(gameObject); ;
+            GameObject.Destroy(gameObject);
         } else
         {
             instance = this;
@@ -27,8 +28,8 @@ public class GameScript : MonoBehaviour {
     }
 
     void Start () {
-		
-	}
+
+    }
 	
 	void Update () {
         
@@ -56,6 +57,7 @@ public class GameScript : MonoBehaviour {
         if(paddles.Length > 0)
         {
             paddle = paddles[0];
+            //paddle.GetComponent<PaddleScript>().livesText.text = "Lives: " + lives;
             SpawnBall();
         }
         
@@ -90,7 +92,22 @@ public class GameScript : MonoBehaviour {
         balls--;
         if (balls <= 0)
         {
-            paddle.GetComponent<PaddleScript>().LoseLife();
+            LoseLife();
+        }
+    }
+
+    public void LoseLife()
+    {
+        lives--;
+        paddle.GetComponent<PaddleScript>().livesText.text = "Lives: " + lives;
+        if (lives > 0)
+        {
+            SpawnBall();
+        }
+        else
+        {
+            //EndGame();
+            Debug.Log("Lose.");
         }
     }
 

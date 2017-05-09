@@ -9,9 +9,8 @@ public class PaddleScript : MonoBehaviour {
     public GameObject ballPrefab;
     public level[] levels;
     public GameObject attachedBall = null;
-    TextMesh livesText;
+    public TextMesh livesText;
 
-    int lives = 3;
     int score = 0;
     public GUISkin scoreboardSkin;
     bool win = false;
@@ -30,7 +29,6 @@ public class PaddleScript : MonoBehaviour {
         DontDestroyOnLoad(GameObject.Find("Lives Counter"));
         DontDestroyOnLoad(GameObject.Find("MusicManager"));
         livesText = GameObject.Find("Lives Counter").GetComponent<TextMesh>();
-        livesText.text = "Lives: " + lives;
     }
 	
 	// Update is called once per frame
@@ -60,19 +58,6 @@ public class PaddleScript : MonoBehaviour {
                 ballRidgidbody.AddForce(300f * Input.GetAxis("Horizontal"), 300f, 0);
                 attachedBall = null;
             }
-        }
-    }
-
-    public void LoseLife()
-    {
-        lives--;
-        livesText.text = "Lives: " + lives;
-        if (lives > 0)
-        {
-            //SpawnBall();
-        } else
-        {
-            EndGame();
         }
     }
 
@@ -116,12 +101,6 @@ public class PaddleScript : MonoBehaviour {
     public void AddPoint(int pointValue)
     {
         score += pointValue;
-    }
-
-    public void AddLife()
-    {
-        lives++;
-        livesText.text = "Lives: " + lives;
     }
 
     public void WinLevel()

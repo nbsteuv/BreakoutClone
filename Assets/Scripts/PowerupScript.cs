@@ -65,6 +65,6 @@ public class PowerupScript : MonoBehaviour {
 
     void AddLife()
     {
-        paddleScript.AddLife();
+        //paddleScript.AddLife();
     }
 }
