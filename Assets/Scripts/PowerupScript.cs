@@ -9,7 +9,7 @@ public class PowerupScript : MonoBehaviour {
     public Material extraLifePowerupMaterial;
 
     System.Random random = new System.Random();
-    PaddleScript paddleScript;
+
     delegate void PowerupAction();
     struct Powerup
     {
@@ -27,10 +27,8 @@ public class PowerupScript : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        GameObject paddleObject = GameObject.Find("Paddle");
-        paddleScript = paddleObject.GetComponent<PaddleScript>();
-        powerups.Add(new Powerup(extraBallPowerupMaterial, SpawnExtraBall));
-        powerups.Add(new Powerup(extraLifePowerupMaterial, AddLife));
+        powerups.Add(new Powerup(extraBallPowerupMaterial, OnSpawnExtraBall));
+        powerups.Add(new Powerup(extraLifePowerupMaterial, OnAddLife));
         SetPowerup();
         ApplyMaterial(powerup.powerupMaterial);
     }
@@ -58,13 +56,24 @@ public class PowerupScript : MonoBehaviour {
         powerupRenderer.material = material;
     }
 
-    void SpawnExtraBall()
+    public delegate void PowerupBroadcastAction();
+    public event PowerupBroadcastAction SpawnExtraBall;
+
+    void OnSpawnExtraBall()
     {
-        //paddleScript.SpawnBall();
+        if(SpawnExtraBall != null)
+        {
+            SpawnExtraBall();
+        }
     }
 
-    void AddLife()
+    public event PowerupBroadcastAction AddLife;
+
+    void OnAddLife()
     {
-        //paddleScript.AddLife();
+        if(AddLife != null)
+        {
+            AddLife();
+        }
     }
 }

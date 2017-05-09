@@ -17,6 +17,7 @@ public class GameScript : MonoBehaviour {
     Text livesText;
     BrickScript[] brickScripts;
     List<BallScript> ballScripts;
+    List<PowerupScript> powerupScripts;
 
     int score = 0;
     int balls;
@@ -36,10 +37,16 @@ public class GameScript : MonoBehaviour {
 
     void Start () {
         ballScripts = new List<BallScript>();
+        powerupScripts = new List<PowerupScript>();
     }
 	
 	void Update () {
         
+    }
+
+    public void RegisterAction(Event action)
+    {
+
     }
 
     private void OnEnable()
@@ -55,6 +62,17 @@ public class GameScript : MonoBehaviour {
         foreach(BallScript ballScript in ballScripts)
         {
             ballScript.BallDeath -= LoseBall;
+        }
+
+        foreach (BrickScript brickScript in brickScripts)
+        {
+            brickScript.BrickDeath -= OnBrickDeath;
+        }
+
+        foreach (PowerupScript powerupScript in powerupScripts)
+        {
+            powerupScript.AddLife -= AddLife;
+            powerupScript.SpawnExtraBall -= SpawnBall;
         }
     }
 
@@ -91,6 +109,7 @@ public class GameScript : MonoBehaviour {
         foreach(BrickScript brickScript in brickScripts)
         {
             brickScript.BrickDeath += OnBrickDeath;
+            brickScript.PowerupSpawned += OnPowerupSpawned;
         }
     }
 
@@ -143,6 +162,12 @@ public class GameScript : MonoBehaviour {
         }
     }
 
+    public void AddLife()
+    {
+        lives++;
+        livesText.text = lives + " Lives";
+    }
+
     public void OnBrickDeath(object source, BrickEventArgs args)
     {
         AddPoint(args.Points);
@@ -150,6 +175,13 @@ public class GameScript : MonoBehaviour {
         {
             LoadNextLevel();
         }
+    }
+
+    public void OnPowerupSpawned(object source, PowerupEventargs args)
+    {
+        args.powerupScript.AddLife += AddLife;
+        args.powerupScript.SpawnExtraBall += SpawnBall;
+
     }
 
     void AddPoint(int points)

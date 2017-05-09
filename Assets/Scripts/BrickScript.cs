@@ -73,6 +73,17 @@ public class BrickScript : MonoBehaviour {
         }
     }
 
+    public delegate void PowerupSpawnAction(object source, PowerupEventargs args);
+    public event PowerupSpawnAction PowerupSpawned;
+
+    public virtual void OnPowerupSpawned(PowerupScript powerupScript)
+    {
+        if(PowerupSpawned != null)
+        {
+            PowerupSpawned(this, new PowerupEventargs(powerupScript));
+        }
+    }
+
     void SpawnPowerup()
     {
         if (powerupPrefab == null)
@@ -84,7 +95,9 @@ public class BrickScript : MonoBehaviour {
         Vector3 powerupPosition = transform.position;
         Quaternion powerupRotation = Quaternion.identity;
 
-        Instantiate(powerupPrefab, powerupPosition, powerupRotation);
+        GameObject powerup = Instantiate(powerupPrefab, powerupPosition, powerupRotation);
+        PowerupScript powerupScript = powerup.GetComponent<PowerupScript>();
+        OnPowerupSpawned(powerupScript);
     }
 }
 
@@ -96,5 +109,14 @@ public class BrickEventArgs : EventArgs
     {
         this.NumBricks = NumBricks;
         this.Points = Points;
+    }
+}
+
+public class PowerupEventargs : EventArgs
+{
+    public PowerupScript powerupScript { get; set; }
+    public PowerupEventargs(PowerupScript powerupScript)
+    {
+        this.powerupScript = powerupScript;
     }
 }
