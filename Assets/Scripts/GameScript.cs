@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -14,6 +15,7 @@ public class GameScript : MonoBehaviour {
     GameObject paddle;
     Text scoreText;
     Text livesText;
+    BrickScript[] brickScripts;
 
     int score = 0;
     int balls;
@@ -77,6 +79,12 @@ public class GameScript : MonoBehaviour {
             paddle = paddles[0];
             SpawnBall();
         }
+
+        brickScripts = GameObject.FindObjectsOfType<BrickScript>();
+        foreach(BrickScript brickScript in brickScripts)
+        {
+            brickScript.BrickDeath += OnBrickDeath;
+        }
     }
 
     public void SpawnBall()
@@ -125,6 +133,21 @@ public class GameScript : MonoBehaviour {
             //EndGame();
             Debug.Log("Lose.");
         }
+    }
+
+    public void OnBrickDeath(object source, BrickEventArgs args)
+    {
+        AddPoint(args.Points);
+        if(args.NumBricks <= 0)
+        {
+            Debug.Log("Win.");
+        }
+    }
+
+    void AddPoint(int points)
+    {
+        score += points;
+        scoreText.text = "Score " + score;
     }
 
     void Lose()

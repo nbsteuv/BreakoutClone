@@ -1,24 +1,26 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class BrickScript : MonoBehaviour {
 
-    static int numBricks = 0;
+    public static int numBricks = 0;
+
     public int pointValue = 1;
     public int hitPoints = 1;
     public bool topAttackOnly = false;
-
     public GameObject powerupPrefab;
     public int powerupPercentChance;
 
-	// Use this for initialization
+    public delegate void BrickDeathAction(object source, BrickEventArgs args);
+    public event BrickDeathAction BrickDeath;
+
 	void Start () {
         numBricks++;
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		
 	}
@@ -42,25 +44,26 @@ public class BrickScript : MonoBehaviour {
 
     void Die()
     {
-        Destroy(gameObject);
-        PaddleScript paddleScript = GameObject.Find("Paddle").GetComponent<PaddleScript>();
-        paddleScript.AddPoint(pointValue);
         numBricks--;
-        if (numBricks <= 0)
+        OnBrickDeath();
+        Destroy(gameObject);
+        if (numBricks > 0 && powerupWillSpawn())
         {
-            paddleScript.WinLevel();
-        } else
+            SpawnPowerup();
+        }
+    }
+
+    public virtual void OnBrickDeath()
+    {
+        if (BrickDeath != null)
         {
-            if (powerupWillSpawn())
-            {
-                SpawnPowerup();
-            }
+            BrickDeath(this, new BrickEventArgs(numBricks, pointValue));
         }
     }
 
     bool powerupWillSpawn()
     {
-        int randomInteger = Random.Range(0, 101);
+        int randomInteger = UnityEngine.Random.Range(0, 101);
         if(randomInteger <= powerupPercentChance)
         {
             return true;
@@ -82,5 +85,16 @@ public class BrickScript : MonoBehaviour {
         Quaternion powerupRotation = Quaternion.identity;
 
         Instantiate(powerupPrefab, powerupPosition, powerupRotation);
+    }
+}
+
+public class BrickEventArgs : EventArgs
+{
+    public int NumBricks { get; set; }
+    public int Points { get; set; }
+    public BrickEventArgs(int NumBricks, int Points)
+    {
+        this.NumBricks = NumBricks;
+        this.Points = Points;
     }
 }
