@@ -16,6 +16,7 @@ public class GameScript : MonoBehaviour {
     Text scoreText;
     Text livesText;
     BrickScript[] brickScripts;
+    List<BallScript> ballScripts;
 
     int score = 0;
     int balls;
@@ -34,7 +35,7 @@ public class GameScript : MonoBehaviour {
     }
 
     void Start () {
-
+        ballScripts = new List<BallScript>();
     }
 	
 	void Update () {
@@ -49,6 +50,12 @@ public class GameScript : MonoBehaviour {
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoad;
+
+        //Is this enough to prevent memory leaks and errors, or does this need to happen when ball is destroyed?
+        foreach(BallScript ballScript in ballScripts)
+        {
+            ballScript.BallDeath -= LoseBall;
+        }
     }
 
     public void StartGame()
@@ -106,6 +113,7 @@ public class GameScript : MonoBehaviour {
         if (paddle.GetComponent<PaddleScript>().attachedBall == null)
         {
             paddle.GetComponent<PaddleScript>().attachedBall = (GameObject)Instantiate(ballPrefab, ballPosition, ballRotation);
+            ballScripts.Add(paddle.GetComponent<PaddleScript>().attachedBall.GetComponent<BallScript>());
             paddle.GetComponent<PaddleScript>().attachedBall.GetComponent<BallScript>().BallDeath += LoseBall;
             balls++;
         }
