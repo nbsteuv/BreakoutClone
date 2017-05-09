@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameScript : MonoBehaviour {
 
@@ -11,7 +12,10 @@ public class GameScript : MonoBehaviour {
     public int lives = 3;
 
     GameObject paddle;
+    Text scoreText;
+    Text livesText;
 
+    int score = 0;
     int balls;
 
     private void Awake()
@@ -53,13 +57,26 @@ public class GameScript : MonoBehaviour {
 
     void OnSceneLoad(Scene scene, LoadSceneMode mode)
     {
+        GameObject[] scoreTexts = GameObject.FindGameObjectsWithTag("ScoreTextUI");
+        if (scoreTexts.Length > 0)
+        {
+            scoreText = GameObject.FindGameObjectsWithTag("ScoreTextUI")[0].GetComponent<Text>();
+            scoreText.text = "Score " + score;
+        }
+
+        GameObject[] livesTexts = GameObject.FindGameObjectsWithTag("LivesTextUI");
+        if (livesTexts.Length > 0)
+        {
+            livesText = GameObject.FindGameObjectsWithTag("LivesTextUI")[0].GetComponent<Text>();
+            livesText.text = lives + " Lives";
+        }
+
         GameObject[] paddles = GameObject.FindGameObjectsWithTag("Paddle");
         if(paddles.Length > 0)
         {
             paddle = paddles[0];
             SpawnBall();
         }
-        
     }
 
     public void SpawnBall()
@@ -98,6 +115,7 @@ public class GameScript : MonoBehaviour {
     public void LoseLife()
     {
         lives--;
+        livesText.text = lives + " Lives";
         if (lives > 0)
         {
             SpawnBall();

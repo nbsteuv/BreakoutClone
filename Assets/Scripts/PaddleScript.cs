@@ -83,19 +83,13 @@ public class PaddleScript : MonoBehaviour {
                 gameOver = "Game Over";
             }
            gameOverText.GetComponent<TextMesh>().text = gameOver;
-            GameObject.Find("Score Text").GetComponent<TextMesh>().text = "Score:\n" + score;
+            //GameObject.Find("Score Text").GetComponent<TextMesh>().text = "Score:\n" + score;
         }
-    }
-
-    void OnGUI()
-    {
-        GUI.skin = scoreboardSkin;
-        GUI.Label(new Rect(0, 10, 300, 100), "Score: " + score);
     }
 
     public void AddPoint(int pointValue)
     {
-        score += pointValue;
+        //score += pointValue;
     }
 
     public void WinLevel()
