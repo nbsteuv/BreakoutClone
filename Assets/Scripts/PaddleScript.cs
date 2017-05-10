@@ -13,7 +13,6 @@ public class PaddleScript : MonoBehaviour {
 	
 	void Update () {
 
-        //Left-right motion
         transform.Translate(paddleSpeed * Time.deltaTime * Input.GetAxis("Horizontal"), 0, 0);
 
         if(transform.position.x > 7.4f)
@@ -50,12 +49,6 @@ public class PaddleScript : MonoBehaviour {
                 contact.otherCollider.attachedRigidbody.AddForce(300f * english, 0, 0);
             }
         }
-    }
-
-    public void EndGame()
-    {
-        GetComponent<MeshRenderer>().enabled = false;
-        SceneManager.LoadScene("GameOver");
     }
 
 }
