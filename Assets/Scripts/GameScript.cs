@@ -44,7 +44,11 @@ public class GameScript : MonoBehaviour {
     }
 	
 	void Update () {
-        
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            BrickScript.numBricks = 0;
+            LoadNextLevel();
+        }
     }
 
     public void RegisterAction(Event action)
