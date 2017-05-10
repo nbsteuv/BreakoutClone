@@ -18,9 +18,12 @@ public class GameScript : MonoBehaviour {
     BrickScript[] brickScripts;
     List<BallScript> ballScripts;
     List<PowerupScript> powerupScripts;
+    Text endScoreText;
 
     int score = 0;
     int balls;
+
+    int endScore = 0;
 
     private void Awake()
     {
@@ -79,6 +82,7 @@ public class GameScript : MonoBehaviour {
     void OnSceneLoad(Scene scene, LoadSceneMode mode)
     {
         balls = 0;
+        endScore = score;
 
         GameObject[] scoreTexts = GameObject.FindGameObjectsWithTag("ScoreTextUI");
         if (scoreTexts.Length > 0)
@@ -106,6 +110,13 @@ public class GameScript : MonoBehaviour {
         {
             brickScript.BrickDeath += OnBrickDeath;
             brickScript.PowerupSpawned += OnPowerupSpawned;
+        }
+
+        GameObject[] endScoreTexts = GameObject.FindGameObjectsWithTag("ScoreText");
+        if(endScoreTexts.Length > 0)
+        {
+            endScoreText = endScoreTexts[0].GetComponent<Text>();
+            endScoreText.text = endScore + " Points";
         }
 
         
@@ -155,7 +166,7 @@ public class GameScript : MonoBehaviour {
         }
         else
         {
-            SceneManager.LoadScene("Lose");
+            Lose();
         }
     }
 
@@ -195,7 +206,7 @@ public class GameScript : MonoBehaviour {
 
     void Lose()
     {
-
+        SceneManager.LoadScene("Lose");
     }
 
 
