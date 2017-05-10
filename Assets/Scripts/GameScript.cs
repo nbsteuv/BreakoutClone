@@ -86,6 +86,7 @@ public class GameScript : MonoBehaviour {
     void OnSceneLoad(Scene scene, LoadSceneMode mode)
     {
         balls = 0;
+        lives = 3;
         endScore = score;
 
         GameObject[] scoreTexts = GameObject.FindGameObjectsWithTag("ScoreTextUI");
