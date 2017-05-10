@@ -51,11 +51,6 @@ public class GameScript : MonoBehaviour {
         }
     }
 
-    public void RegisterAction(Event action)
-    {
-
-    }
-
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoad;
@@ -88,6 +83,10 @@ public class GameScript : MonoBehaviour {
         balls = 0;
         lives = 3;
         endScore = score;
+        if(scene.name == "Lose")
+        {
+            score = 0;
+        }
 
         GameObject[] scoreTexts = GameObject.FindGameObjectsWithTag("ScoreTextUI");
         if (scoreTexts.Length > 0)
