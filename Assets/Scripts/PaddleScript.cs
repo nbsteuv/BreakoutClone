@@ -9,8 +9,6 @@ public class PaddleScript : MonoBehaviour {
     public GameObject attachedBall = null;
 
 	void Start () {
-        DontDestroyOnLoad(gameObject);
-        DontDestroyOnLoad(GameObject.Find("MusicManager"));
     }
 	
 	void Update () {
