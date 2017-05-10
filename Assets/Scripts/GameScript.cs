@@ -76,11 +76,6 @@ public class GameScript : MonoBehaviour {
         }
     }
 
-    public void StartGame()
-    {
-        SceneManager.LoadScene(1);
-    }
-
     void OnSceneLoad(Scene scene, LoadSceneMode mode)
     {
         balls = 0;
@@ -112,6 +107,8 @@ public class GameScript : MonoBehaviour {
             brickScript.BrickDeath += OnBrickDeath;
             brickScript.PowerupSpawned += OnPowerupSpawned;
         }
+
+        
     }
 
     public void SpawnBall()
@@ -158,8 +155,7 @@ public class GameScript : MonoBehaviour {
         }
         else
         {
-            //EndGame();
-            Debug.Log("Lose.");
+            SceneManager.LoadScene("Lose");
         }
     }
 
