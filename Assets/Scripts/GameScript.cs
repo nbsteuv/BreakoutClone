@@ -91,14 +91,14 @@ public class GameScript : MonoBehaviour {
         GameObject[] scoreTexts = GameObject.FindGameObjectsWithTag("ScoreTextUI");
         if (scoreTexts.Length > 0)
         {
-            scoreText = GameObject.FindGameObjectsWithTag("ScoreTextUI")[0].GetComponent<Text>();
+            scoreText = scoreTexts[0].GetComponent<Text>();
             scoreText.text = "Score " + score;
         }
 
         GameObject[] livesTexts = GameObject.FindGameObjectsWithTag("LivesTextUI");
         if (livesTexts.Length > 0)
         {
-            livesText = GameObject.FindGameObjectsWithTag("LivesTextUI")[0].GetComponent<Text>();
+            livesText = livesTexts[0].GetComponent<Text>();
             livesText.text = lives + " Lives";
         }
 
