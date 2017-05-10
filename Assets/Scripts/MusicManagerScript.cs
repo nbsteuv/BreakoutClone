@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MusicManagerScript : MonoBehaviour {
 
-    MusicManagerScript instance;
+    static MusicManagerScript instance;
 
     public AudioClip[] songs;
     AudioSource currentAudio;
