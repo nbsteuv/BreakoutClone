@@ -79,11 +79,12 @@ public class GameScript : MonoBehaviour {
     public void StartGame()
     {
         SceneManager.LoadScene(1);
-        balls = 0;
     }
 
     void OnSceneLoad(Scene scene, LoadSceneMode mode)
     {
+        balls = 0;
+
         GameObject[] scoreTexts = GameObject.FindGameObjectsWithTag("ScoreTextUI");
         if (scoreTexts.Length > 0)
         {
