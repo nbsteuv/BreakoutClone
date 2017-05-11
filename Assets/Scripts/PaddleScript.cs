@@ -10,17 +10,19 @@ public class PaddleScript : MonoBehaviour {
 	
 	void Update () {
 
-        transform.Translate(paddleSpeed * Time.deltaTime * Input.GetAxis("Horizontal"), 0, 0);
+        float newPositionX = Mathf.Clamp(transform.position.x + paddleSpeed * Time.deltaTime * Input.GetAxis("Horizontal"), -7.4f, 7.4f);
 
-        if(transform.position.x > 7.4f)
-        {
-            transform.position = new Vector3(7.4f, transform.position.y, transform.position.z);
-        }
+        transform.position = new Vector3 (newPositionX, transform.position.y, transform.position.z);
 
-        if (transform.position.x < -7.4f)
-        {
-            transform.position = new Vector3(-7.4f, transform.position.y, transform.position.z);
-        }
+        //if(transform.position.x > 7.4f)
+        //{
+        //    transform.position = new Vector3(7.4f, transform.position.y, transform.position.z);
+        //}
+
+        //if (transform.position.x < -7.4f)
+        //{
+        //    transform.position = new Vector3(-7.4f, transform.position.y, transform.position.z);
+        //}
 
         if (attachedBall)
         {
