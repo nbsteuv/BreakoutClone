@@ -7,9 +7,6 @@ public class PaddleScript : MonoBehaviour {
 
     public float paddleSpeed;
     public GameObject attachedBall = null;
-
-	void Start () {
-    }
 	
 	void Update () {
 
