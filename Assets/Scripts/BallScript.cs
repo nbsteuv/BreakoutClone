@@ -36,7 +36,6 @@ public class BallScript : MonoBehaviour {
     private void OnCollisionEnter(Collision collision)
     {
         AudioSource.PlayClipAtPoint(blipAudio[Random.Range(0, blipAudio.Length)], transform.position, 0.5f);
-        Debug.Log(collision.collider);
         if (!collision.collider.CompareTag("Paddle"))
         {
             GetComponent<Rigidbody>().AddForce(rightwardForce, -downwardForce, 0);
