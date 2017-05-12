@@ -14,16 +14,6 @@ public class PaddleScript : MonoBehaviour {
 
         transform.position = new Vector3 (newPositionX, transform.position.y, transform.position.z);
 
-        //if(transform.position.x > 7.4f)
-        //{
-        //    transform.position = new Vector3(7.4f, transform.position.y, transform.position.z);
-        //}
-
-        //if (transform.position.x < -7.4f)
-        //{
-        //    transform.position = new Vector3(-7.4f, transform.position.y, transform.position.z);
-        //}
-
         if (attachedBall)
         {
             Rigidbody ballRidgidbody = attachedBall.GetComponent<Rigidbody>();
