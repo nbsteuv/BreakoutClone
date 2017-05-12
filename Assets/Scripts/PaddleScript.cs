@@ -7,6 +7,7 @@ public class PaddleScript : MonoBehaviour {
 
     public float paddleSpeed;
     public GameObject attachedBall = null;
+    public float autoOffset = 0;
 
     public float clamp = 7.4f;
 
@@ -29,7 +30,7 @@ public class PaddleScript : MonoBehaviour {
             }
             if (followingBall != null)
             {
-                newPositionX = Mathf.Clamp(followingBall.transform.position.x, -clamp, clamp);
+                newPositionX = Mathf.Clamp(followingBall.transform.position.x + autoOffset, -clamp, clamp);
             }
             
         } else
