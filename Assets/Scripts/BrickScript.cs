@@ -12,6 +12,8 @@ public class BrickScript : MonoBehaviour {
     public int hitPoints = 1;
     public bool topAttackOnly = false;
     public GameObject powerupPrefab;
+    public GameObject brickSmokePrefab;
+    public Color brickSmokeColor;
     public int powerupPercentChance;
 
     public delegate void BrickDeathAction(object source, BrickEventArgs args);
@@ -46,6 +48,7 @@ public class BrickScript : MonoBehaviour {
     {
         numBricks--;
         OnBrickDeath();
+        SpawnSmoke();
         Destroy(gameObject);
         if (numBricks > 0 && powerupWillSpawn())
         {
@@ -59,6 +62,14 @@ public class BrickScript : MonoBehaviour {
         {
             BrickDeath(this, new BrickEventArgs(numBricks, pointValue));
         }
+    }
+
+    void SpawnSmoke()
+    {
+        GameObject brickSmoke = (GameObject)Instantiate(brickSmokePrefab, transform.position, Quaternion.identity);
+        ParticleSystem.MainModule brickSmokeSettings = brickSmoke.GetComponent<ParticleSystem>().main;
+        //Need to make sure alpha of color is higher if particles do not render
+        brickSmokeSettings.startColor = new ParticleSystem.MinMaxGradient(brickSmokeColor);
     }
 
     bool powerupWillSpawn()

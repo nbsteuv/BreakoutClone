@@ -32,6 +32,11 @@ public class PaddleScript : MonoBehaviour {
             {
                 newPositionX = Mathf.Clamp(followingBall.transform.position.x + autoOffset, -clamp, clamp);
             }
+
+            if(attachedBall != null)
+            {
+                fireBall();
+            }
             
         } else
         {
@@ -43,14 +48,9 @@ public class PaddleScript : MonoBehaviour {
 
         if (attachedBall)
         {
-            Rigidbody ballRidgidbody = attachedBall.GetComponent<Rigidbody>();
-            ballRidgidbody.position = transform.position + new Vector3(0, 1f, 0);
-
             if (Input.GetButtonDown("Jump"))
             {
-                ballRidgidbody.isKinematic = false;
-                ballRidgidbody.AddForce(300f * Input.GetAxis("Horizontal"), 300f, 0);
-                attachedBall = null;
+                fireBall();
             }
         }
     }
@@ -58,6 +58,15 @@ public class PaddleScript : MonoBehaviour {
     public void toggleAuto()
     {
         auto = !auto;
+    }
+
+    void fireBall()
+    {
+        Rigidbody ballRidgidbody = attachedBall.GetComponent<Rigidbody>();
+        ballRidgidbody.position = transform.position + new Vector3(0, 1f, 0);
+        ballRidgidbody.isKinematic = false;
+        ballRidgidbody.AddForce(300f * Input.GetAxis("Horizontal"), 300f, 0);
+        attachedBall = null;
     }
 
     private void OnCollisionEnter(Collision collision)
