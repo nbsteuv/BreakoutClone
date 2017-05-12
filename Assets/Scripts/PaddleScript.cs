@@ -7,10 +7,36 @@ public class PaddleScript : MonoBehaviour {
 
     public float paddleSpeed;
     public GameObject attachedBall = null;
+
+    public float clamp = 7.4f;
+
+    bool auto = false;
+    GameObject followingBall = null;
 	
 	void Update () {
 
-        float newPositionX = Mathf.Clamp(transform.position.x + paddleSpeed * Time.deltaTime * Input.GetAxis("Horizontal"), -7.4f, 7.4f);
+        float newPositionX = transform.position.x;
+
+        if (auto)
+        {
+            if (followingBall == null)
+            {
+                GameObject[] balls = GameObject.FindGameObjectsWithTag("Ball");
+                if (balls.Length > 0)
+                {
+                    followingBall = balls[0];
+                }
+            }
+            if (followingBall != null)
+            {
+                newPositionX = Mathf.Clamp(followingBall.transform.position.x, -clamp, clamp);
+            }
+            
+        } else
+        {
+            newPositionX = Mathf.Clamp(transform.position.x + paddleSpeed * Time.deltaTime * Input.GetAxis("Horizontal"), -clamp, clamp);
+        }
+        
 
         transform.position = new Vector3 (newPositionX, transform.position.y, transform.position.z);
 
@@ -26,6 +52,11 @@ public class PaddleScript : MonoBehaviour {
                 attachedBall = null;
             }
         }
+    }
+
+    public void toggleAuto()
+    {
+        auto = !auto;
     }
 
     private void OnCollisionEnter(Collision collision)

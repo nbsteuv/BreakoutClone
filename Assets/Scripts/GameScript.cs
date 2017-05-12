@@ -49,6 +49,11 @@ public class GameScript : MonoBehaviour {
             BrickScript.numBricks = 0;
             LoadNextLevel();
         }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            paddle.GetComponent<PaddleScript>().toggleAuto();
+        }
     }
 
     private void OnEnable()
