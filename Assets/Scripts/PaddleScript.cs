@@ -48,6 +48,7 @@ public class PaddleScript : MonoBehaviour {
 
         if (attachedBall)
         {
+            attachedBall.transform.position = new Vector3(newPositionX, attachedBall.transform.position.y, attachedBall.transform.position.z);
             if (Input.GetButtonDown("Jump"))
             {
                 fireBall();
