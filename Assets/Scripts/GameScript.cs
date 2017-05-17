@@ -54,6 +54,11 @@ public class GameScript : MonoBehaviour {
         {
             paddle.GetComponent<PaddleScript>().toggleAuto();
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 
     private void OnEnable()
